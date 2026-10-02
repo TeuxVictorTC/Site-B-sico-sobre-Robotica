@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#081321">
+  <meta name="description" content="A friendly introduction to robotics. Discover how robots sense, think, and act, and explore what they do in the real world.">
+  <title>Robotica — A world of possibilities</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23081321'/%3E%3Cpath d='M16 5v4' stroke='%2351d9e8' stroke-width='2'/%3E%3Crect x='6' y='9' width='20' height='16' rx='5' fill='%2351d9e8'/%3E%3Ccircle cx='12' cy='16' r='2' fill='%23081321'/%3E%3Ccircle cx='20' cy='16' r='2' fill='%23081321'/%3E%3Cpath d='M12 21h8' stroke='%23081321' stroke-width='2'/%3E%3C/svg%3E">
+  <style>
+    :root { color-scheme: dark; --bg:#081321; --surface:#101e30; --line:#253447; --text:#f4f7fc; --muted:#b1bfd0; --cyan:#51d9e8; --blue:#285af6; }
+    * { box-sizing:border-box; }
+    html { scroll-behavior:smooth; scroll-padding-top:6rem; }
+    body { margin:0; background:var(--bg); color:var(--text); font-family:Inter, "Segoe UI", Arial, sans-serif; font-size:1rem; line-height:1.65; }
+    a { color:inherit; text-decoration:none; }
+    button { font:inherit; }
+    button, a, summary { -webkit-tap-highlight-color:transparent; }
+    a:focus-visible, button:focus-visible, summary:focus-visible { outline:3px solid var(--cyan); outline-offset:6px; border-radius:3px; }
+    .skip { position:fixed; top:1rem; left:1rem; padding:.6rem 1rem; background:var(--cyan); color:var(--bg); transform:translateY(-160%); z-index:10; }
+    .skip:focus { transform:translateY(0); }
+    .container { width:min(1180px, calc(100% - 6rem)); margin-inline:auto; }
+    header { border-bottom:1px solid var(--line); }
+    .header-inner { min-height:94px; display:flex; align-items:center; justify-content:space-between; gap:2rem; }
+    .brand { display:flex; align-items:center; gap:.75rem; font-size:1.35rem; font-weight:750; letter-spacing:-.035em; }
+    .brand svg { width:32px; height:32px; color:var(--cyan); }
+    .brand em { font-style:normal; color:var(--cyan); }
+    nav { display:flex; align-items:center; gap:2.25rem; }
+    nav a { color:var(--muted); font-size:.9rem; transition:color .18s; }
+    nav a:hover { color:var(--text); }
+    nav .nav-cta { color:var(--text); border:1px solid #405065; border-radius:5px; padding:.6rem 1rem; }
+    nav .nav-cta:hover { background:var(--surface); border-color:var(--cyan); }
+    .hero { display:grid; grid-template-columns:1.08fr 1fr; gap:2.5rem; align-items:center; padding-block:4.6rem 3.8rem; }
+    .eyebrow { margin:0 0 1.4rem; color:var(--cyan); font-size:.78rem; font-weight:650; letter-spacing:.18em; text-transform:uppercase; }
+    .eyebrow::before { content:""; display:inline-block; width:22px; height:2px; background:currentColor; vertical-align:middle; margin-right:.7rem; }
+    h1 { font-size:clamp(3.6rem, 6.5vw, 5.7rem); line-height:1.02; font-weight:750; letter-spacing:-.06em; margin:0 0 1.6rem; }
+    h1 span { color:var(--cyan); }
+    .hero-copy { max-width:28rem; margin:0 0 2rem; color:var(--muted); font-size:1.06rem; }
+    .button { display:inline-flex; align-items:center; justify-content:center; background:var(--blue); color:white; border:1px solid transparent; border-radius:5px; padding:.9rem 1.4rem; font-size:.94rem; font-weight:600; transition:background .2s, transform .2s; }
+    .button:hover { background:#3d6aff; transform:translateY(-2px); }
+    .hero-note { margin-top:1.7rem; display:flex; gap:.6rem; align-items:center; color:var(--muted); font-size:.8rem; }
+    .hero-note svg { width:17px; height:17px; flex:none; }
+    .hero-figure { margin:0; position:relative; }
+    .hero-image { display:block; width:100%; aspect-ratio:4/4.2; object-fit:cover; object-position:center 35%; border:1px solid var(--line); border-radius:14px; background:#0c1623; }
+    .image-caption { display:flex; justify-content:space-between; gap:1rem; padding-top:.75rem; color:var(--muted); font-size:.75rem; letter-spacing:.02em; }
+    .image-caption span:last-child { color:var(--cyan); }
+    .topic-strip { display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:1rem; border-top:1px solid var(--line); border-bottom:1px solid var(--line); padding-block:1.45rem; color:var(--muted); font-size:.83rem; }
+    .topic-strip p { margin:0; font-size:.78rem; color:#d3dce7; }
+    .topics { display:flex; flex-wrap:wrap; gap:1.8rem; font-weight:600; }
+    .topics span { display:flex; align-items:center; gap:.6rem; }
+    .topics svg { width:18px; height:18px; color:var(--cyan); }
+    section { padding-block:5.5rem; }
+    .section-top { display:flex; justify-content:space-between; align-items:flex-end; gap:2.5rem; margin-bottom:2.3rem; }
+    .section-number { color:var(--cyan); font-family:Consolas,monospace; font-size:.8rem; letter-spacing:.06em; margin:0 0 .65rem; }
+    h2 { margin:0; font-size:clamp(2rem, 3.5vw, 3rem); line-height:1.15; letter-spacing:-.04em; font-weight:700; }
+    .section-intro { margin:0; max-width:26rem; color:var(--muted); }
+    .process-grid { display:grid; grid-template-columns:repeat(3,1fr); border:1px solid var(--line); border-radius:9px; overflow:hidden; }
+    .process-card { background:var(--surface); padding:2rem; }
+    .process-card + .process-card { border-left:1px solid var(--line); }
+    .card-heading { display:flex; justify-content:space-between; align-items:center; margin-bottom:1.6rem; }
+    .icon { width:42px; height:42px; color:var(--cyan); }
+    .step { font-family:Consolas,monospace; color:#8395ac; font-size:.8rem; }
+    h3 { font-size:1.35rem; line-height:1.25; letter-spacing:-.025em; margin:0 0 .8rem; }
+    .process-card p { color:var(--muted); margin:0; }
+    .example { border-top:1px solid #2d3c50; padding-top:1.2rem; margin-top:1.5rem; font-size:.87rem; }
+    .example strong { color:#d8e6f5; font-weight:550; }
+    .loop-note { display:flex; align-items:center; justify-content:center; gap:.7rem; margin:1.4rem 0 0; color:var(--muted); font-size:.85rem; }
+    .loop-note svg { width:18px; height:18px; color:var(--cyan); flex:none; }
+    .applications { padding-top:0; }
+    .use-grid { display:grid; grid-template-columns:repeat(3, 1fr); gap:1.3rem; }
+    .use-card { padding:1.6rem 0; border-top:1px solid var(--line); }
+    .use-tag { display:inline-block; color:var(--cyan); margin-bottom:1rem; font-size:.78rem; }
+    .use-card h3 { font-size:1.25rem; }
+    .use-card p { margin:0; color:var(--muted); }
+    .use-card .use-example { margin-top:1.3rem; font-size:.85rem; color:#d9e2ed; }
+    .faq-section { background:#0d1929; border-block:1px solid var(--line); }
+    .faq-layout { display:grid; grid-template-columns:.9fr 1.1fr; gap:5rem; }
+    .faq-intro { margin:1.2rem 0 0; max-width:23rem; color:var(--muted); }
+    details { border-bottom:1px solid #324056; }
+    details:first-child { border-top:1px solid #324056; }
+    summary { list-style:none; cursor:pointer; padding:1.3rem 0; font-weight:550; display:flex; justify-content:space-between; align-items:center; gap:1rem; }
+    summary::-webkit-details-marker { display:none; }
+    summary::after { content:"+"; color:var(--cyan); font-size:1.4rem; font-weight:400; line-height:1; }
+    details[open] summary::after { content:"−"; }
+    details p { margin:0 0 1.4rem; padding-right:2rem; color:var(--muted); }
+    .start-section { padding-block:4.5rem; }
+    .start-panel { display:grid; grid-template-columns:1fr 1fr; gap:4rem; align-items:start; }
+    .start-panel p { color:var(--muted); max-width:27rem; }
+    .start-steps { list-style:none; padding:0; margin:0; }
+    .start-steps li { display:flex; gap:1rem; padding:1rem 0; border-bottom:1px solid var(--line); }
+    .start-steps li:first-child { padding-top:0; }
+    .start-steps .num { display:flex; align-items:center; justify-content:center; flex:none; width:32px; height:32px; border:1px solid #415368; border-radius:50%; font-family:Consolas,monospace; font-size:.83rem; color:var(--cyan); }
+    .start-steps strong { font-size:.98rem; font-weight:600; }
+    .start-steps p { margin:.2rem 0 0; font-size:.9rem; }
+    footer { border-top:1px solid var(--line); }
+    .footer-inner { display:flex; justify-content:space-between; align-items:center; gap:1.5rem; padding-block:1.7rem; }
+    .footer-inner .brand { font-size:1.06rem; }
+    .footer-inner .brand svg { width:24px; height:24px; }
+    .footer-inner p { margin:0; font-size:.78rem; color:var(--muted); }
+    .back-top { font-size:.8rem; color:#d1ddec; }
+    .back-top:hover { color:var(--cyan); }
+    @media (min-width:1450px) { .hero { padding-block:5.2rem; } }
+    @media (max-width:1000px) { .container { width:calc(100% - 3rem); } nav { gap:1.4rem; } .hero { gap:2rem; } h1 { font-size:clamp(3.2rem,7vw,4.5rem); } .hero-image { aspect-ratio:4/5; } .process-card { padding:1.5rem; } .faq-layout { gap:2.5rem; } }
+    @media (max-width:720px) { .header-inner { min-height:78px; gap:1rem; flex-wrap:wrap; padding-block:1rem; } .brand { font-size:1.2rem; } nav { gap:1.1rem; } nav a { font-size:.8rem; } nav .nav-cta { display:none; } .hero { grid-template-columns:1fr; padding-block:3.3rem 2rem; gap:2.5rem; } h1 { font-size:clamp(3.1rem,11vw,4.9rem); } .hero-copy { max-width:35rem; } .hero-image { aspect-ratio:5/4; object-position:center 30%; } .topic-strip { justify-content:flex-start; gap:.8rem; } .topics { gap:1.2rem; font-size:.75rem; } section { padding-block:3.7rem; } .section-top { display:block; margin-bottom:1.7rem; } .section-intro { margin-top:1.2rem; max-width:35rem; } .process-grid { grid-template-columns:1fr; } .process-card { padding:1.7rem; } .process-card + .process-card { border-left:0; border-top:1px solid var(--line); } .card-heading { margin-bottom:1.1rem; } .example { margin-top:1.1rem; padding-top:1rem; } .use-grid { grid-template-columns:1fr; gap:.5rem; } .use-card { padding-block:1.4rem; } .faq-layout,.start-panel { grid-template-columns:1fr; gap:2rem; } .faq-intro { max-width:35rem; } .start-panel p { max-width:35rem; } .footer-inner { flex-wrap:wrap; } .footer-inner p { width:100%; order:3; } }
+    @media (max-width:400px) { .container { width:calc(100% - 2rem); } nav { gap:.85rem; } .header-inner { gap:.8rem; } .brand svg { width:26px; height:26px; } .topics { gap:.9rem; } }
+    @media (prefers-reduced-motion:reduce) { html { scroll-behavior:auto; } *,*::before,*::after { transition:none!important; } }
+  </style>
+</head>
+<body id="top">
+  <a class="skip" href="#main">Skip to content</a>
+  <header>
+    <div class="container header-inner">
+      <a class="brand" href="#top" aria-label="Robotica home"><svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M16 3v5M3 15v7M29 15v7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><rect x="7" y="8" width="18" height="19" rx="5" stroke="currentColor" stroke-width="2"/><path d="M12 22h8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="15" r="2" fill="currentColor"/><circle cx="20" cy="15" r="2" fill="currentColor"/></svg><span>robotica<em>.</em></span></a>
+      <nav aria-label="Main navigation"><a href="#how-it-works">The basics</a><a href="#applications">In the world</a><a href="#questions">Questions</a><a class="nav-cta" href="#start">Start exploring</a></nav>
+    </div>
+  </header>
+  <main id="main">
+    <div class="container">
+      <div class="hero">
+        <div>
+          <p class="eyebrow">Meet the world of robotics</p>
+          <h1>A little curiosity.<br>A world of <span>robots.</span></h1>
+          <p class="hero-copy">From a vacuum finding its way around a room to a rover exploring another planet, robotics turns code into action.</p>
+          <a class="button" href="#how-it-works">Discover how robots work</a>
+          <p class="hero-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M12 3 2 7l10 4 10-4-10-4ZM6 9v7c3 3 9 3 12 0V9M22 7v9"/></svg>A beginner-friendly place to start</p>
+        </div>
+        <figure class="hero-figure"><img class="hero-image" src="robot.webp" width="960" height="1200" alt="Illustrative white humanoid robot with exposed mechanical joints and blue studio lighting" fetchpriority="high"><figcaption class="image-caption"><span>Engineering meets imagination</span><span>Concept illustration / 01</span></figcaption></figure>
+      </div>
+      <div class="topic-strip"><p>ONE FIELD. MANY POSSIBILITIES.</p><div class="topics"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 20V9l6 3V8l6 3V4h4v16H4ZM8 16h2m4 0h2"/></svg>Industry</span><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 3h6v6h6v6h-6v6H9v-6H3V9h6V3Z"/></svg>Healthcare</span><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="12" r="7"/><ellipse cx="12" cy="12" rx="11" ry="3" transform="rotate(-30 12 12)"/></svg>Exploration</span></div></div>
+      <section id="how-it-works" aria-labelledby="basics-heading">
+        <div class="section-top"><div><p class="section-number">01 / THE BASICS</p><h2 id="basics-heading">Sense. Think. Act.</h2></div><p class="section-intro">Robotics brings mechanics, electronics, and programming together. Many robots work through this simple loop.</p></div>
+        <div class="process-grid">
+          <article class="process-card"><div class="card-heading"><svg class="icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M5 24s7-12 19-12 19 12 19 12-7 12-19 12S5 24 5 24Z"/><circle cx="24" cy="24" r="6"/><path d="M24 3v4M24 41v4M4 8l4 4M40 36l4 4M4 40l4-4M40 12l4-4"/></svg><span class="step">01</span></div><h3>Sense the surroundings</h3><p>Sensors collect information, such as distance, light, or movement, so a robot can respond to what is around it.</p><div class="example"><strong>For example:</strong> A distance sensor detects an obstacle.</div></article>
+          <article class="process-card"><div class="card-heading"><svg class="icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="12" y="12" width="24" height="24" rx="3"/><rect x="19" y="19" width="10" height="10" rx="1"/><path d="M18 5v7M24 5v7M30 5v7M18 36v7M24 36v7M30 36v7M5 18h7M5 24h7M5 30h7M36 18h7M36 24h7M36 30h7"/></svg><span class="step">02</span></div><h3>Choose what happens</h3><p>A controller runs a program that processes sensor information and chooses an action. It may use fixed rules or AI.</p><div class="example"><strong>For example:</strong> The program tells the robot to turn.</div></article>
+          <article class="process-card"><div class="card-heading"><svg class="icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="24" cy="24" r="7"/><path d="m20 5-1 7-5 3-7-2-4 7 6 5 1 5-4 6 6 6 6-4 5 1 5 6 7-4-2-7 3-5 7-1V16l-7-1-3-5 2-7-7-4-5 6Z" transform="translate(2 2) scale(.92)"/></svg><span class="step">03</span></div><h3>Make a move</h3><p>Motors and other actuators turn commands into physical action, moving wheels, joints, or a gripper.</p><div class="example"><strong>For example:</strong> The wheels steer around the obstacle.</div></article>
+        </div>
+        <p class="loop-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M20 7a9 9 0 0 0-15 0M4 17a9 9 0 0 0 15 0M20 3v4h-4M4 21v-4h4"/></svg>Feedback lets the robot check the result and repeat the loop.</p>
+      </section>
+      <section class="applications" id="applications" aria-labelledby="uses-heading">
+        <div class="section-top"><div><p class="section-number">02 / OUT IN THE WORLD</p><h2 id="uses-heading">More than a metal face.</h2></div><p class="section-intro">Most robots look nothing like people. Their shape follows the job they need to do.</p></div>
+        <div class="use-grid">
+          <article class="use-card"><span class="use-tag">PRECISION & REPETITION</span><h3>Helping things get made</h3><p>Industrial robot arms weld, paint, and move parts. They can repeat carefully programmed movements in a factory.</p><p class="use-example">Think: a robotic arm assembling a car.</p></article>
+          <article class="use-card"><span class="use-tag">ASSISTANCE & CONTROL</span><h3>Supporting healthcare</h3><p>Robotic systems can assist clinicians with controlled movements or help deliver supplies around a hospital.</p><p class="use-example">Think: a surgical system guided by a surgeon.</p></article>
+          <article class="use-card"><span class="use-tag">DISCOVERY & DISTANCE</span><h3>Reaching new places</h3><p>Robots explore environments that are hard for people to reach, from the deep ocean to the surface of Mars.</p><p class="use-example">Think: a rover collecting data on another planet.</p></article>
+        </div>
+      </section>
+    </div>
+    <section class="faq-section" id="questions" aria-labelledby="questions-heading"><div class="container faq-layout"><div><p class="section-number">03 / A FEW GOOD QUESTIONS</p><h2 id="questions-heading">Curiosity is<br>part of the process.</h2><p class="faq-intro">You do not need to know everything to get started. Begin with the questions that interest you.</p></div><div>
+      <details open><summary>Is a robot the same thing as AI?</summary><p>No. A robot is a physical machine that carries out tasks. Artificial intelligence is software that can perform tasks such as recognizing patterns. A robot can use AI, but many robots work with programmed rules.</p></details>
+      <details><summary>Do all robots work by themselves?</summary><p>No. Some robots act on their own within set limits, some follow a fixed program, and others are controlled by a person. Different jobs need different levels of human involvement.</p></details>
+      <details><summary>Can I learn without buying a robot?</summary><p>Yes. Start with programming and simple simulations. You can practise giving instructions, using conditions, and solving movement problems before working with hardware.</p></details>
+    </div></div></section>
+    <section class="start-section container" id="start" aria-labelledby="start-heading"><div class="start-panel"><div><p class="section-number">04 / YOUR FIRST STEP</p><h2 id="start-heading">Start small.<br>Keep experimenting.</h2><p>Robotics is about making an idea work in the real world. Pick one small problem and build your understanding a step at a time.</p></div><ol class="start-steps"><li><span class="num">1</span><div><strong>Learn to give clear instructions</strong><p>Practise loops and “if this, then that” decisions in a programming language.</p></div></li><li><span class="num">2</span><div><strong>Try a simple simulation</strong><p>Make a virtual robot move, turn, and stop at an obstacle.</p></div></li><li><span class="num">3</span><div><strong>Observe, adjust, repeat</strong><p>Check what happened, change one thing, and try again.</p></div></li></ol></div></section>
+  </main>
+  <footer><div class="container footer-inner"><a class="brand" href="#top" aria-label="Robotica home"><svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M16 3v5" stroke="currentColor" stroke-width="2"/><rect x="7" y="8" width="18" height="19" rx="5" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="15" r="2" fill="currentColor"/><circle cx="20" cy="15" r="2" fill="currentColor"/><path d="M12 22h8" stroke="currentColor" stroke-width="2"/></svg><span>robotica<em>.</em></span></a><p>For curious minds. Built around the basics.</p><a class="back-top" href="#top">Back to top</a></div></footer>
+</body>
+</html>
